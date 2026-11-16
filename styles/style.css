@@ -1875,6 +1875,37 @@ a {
   font-size: 11px;
 }
 
+.whatsapp-chat {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 20;
+  display: grid;
+  width: 60px;
+  aspect-ratio: 1;
+  place-items: center;
+  background: #fff;
+  border-radius: 50%;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.whatsapp-chat:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.32);
+}
+
+.whatsapp-chat:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+.whatsapp-chat svg {
+  width: 50px;
+  height: 50px;
+}
+
 .footer__legal {
   display: flex;
   justify-content: space-between;
