@@ -1161,7 +1161,9 @@ a {
 .about {
   overflow: hidden;
   padding: 80px 0;
-  background: #010101;
+  background:
+    radial-gradient(ellipse 55% 100% at 50% 50%, rgba(118, 101, 34, 0.65), transparent 72%),
+    #010101;
   color: #fff;
 }
 
@@ -1188,8 +1190,8 @@ a {
 }
 
 .about__copy h2 {
-  margin: 0 0 14px;
-  font-size: clamp(42px, 4vw, 52px);
+  margin: 0 0 30px;
+  font-size: 70px;
   letter-spacing: -0.06em;
   line-height: 0.88;
 }
@@ -1201,16 +1203,30 @@ a {
 
 .about__copy p {
   margin: 0 0 12px;
+  font-size: 20px;
+  font-weight: 200;
 }
 
 .about__copy ul {
-  padding-left: 16px;
+  padding-left: 32px;
   margin: 0 0 18px;
 }
 
-.about__promise {
-  margin-top: 24px !important;
-  font-weight: 700;
+.about__copy li {
+  font-size: 20px;
+  font-weight: 200;
+}
+
+.about__specialization {
+  margin-top: 20px !important;
+  padding-top: 10px;
+  font-size: 20px;
+}
+
+.about__copy .about__promise {
+  margin-top: 30px !important;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .about__signature {
@@ -1224,11 +1240,16 @@ a {
 
 .about__signature small {
   color: var(--lime);
+  font-size: 15px;
+}
+
+.about__signature strong {
+  font-size: 18px;
 }
 
 .about__signature img {
-  width: 120px;
-  height: 42px;
+  width: 150px;
+  height: 52px;
   margin-top: 2px;
   object-fit: contain;
   object-position: left center;
@@ -1927,10 +1948,95 @@ a {
   text-decoration: none;
 }
 
-.footer__legal a::before {
+.footer__privacy-settings {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+
+.footer__legal a::before,
+.footer__privacy-settings::before {
   margin-right: 9px;
   color: #d5ddd8;
   content: "·";
+}
+
+.footer__privacy-settings:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 3px;
+}
+
+.analytics-consent {
+  position: fixed;
+  z-index: 40;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  left: 50%;
+  display: flex;
+  width: min(820px, calc(100% - 120px));
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 20px;
+  border: 1px solid rgba(223, 250, 83, 0.35);
+  border-radius: 14px;
+  background: var(--forest-card);
+  color: #fff;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  transform: translateX(-50%);
+}
+
+.analytics-consent__copy h2 {
+  margin: 0 0 6px;
+  color: var(--lime);
+  font-size: 16px;
+}
+
+.analytics-consent__copy p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.analytics-consent__copy .analytics-consent__error {
+  margin-top: 8px;
+  color: #ffd1c9;
+}
+
+.analytics-consent__actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+.analytics-consent__button {
+  min-height: 42px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.analytics-consent__button--reject {
+  background: transparent;
+  color: #fff;
+}
+
+.analytics-consent__button--accept {
+  border-color: var(--lime);
+  background: var(--lime);
+  color: var(--forest);
+}
+
+.analytics-consent__button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
 }
 
 .preview-dialog {
@@ -2579,6 +2685,9 @@ a {
 
   .about {
     padding: 80px 0 50px;
+    background:
+      radial-gradient(circle 440px at 50% 48%, rgba(118, 101, 34, 0.55), transparent 72%),
+      #010101;
   }
 
   .about__inner {
@@ -2610,8 +2719,8 @@ a {
   }
 
   .about__copy h2 {
-    margin-bottom: 16px;
-    font-size: 36px;
+    margin-bottom: 30px;
+    font-size: 60px;
     line-height: 0.98;
   }
 
@@ -2619,12 +2728,20 @@ a {
     margin-bottom: 12px;
   }
 
+  .about__copy > p:not(.about__eyebrow):not(.about__promise),
+  .about__copy li {
+    font-size: 18px;
+    line-height: 30px;
+  }
+
   .about__copy ul {
     margin-bottom: 18px;
   }
 
   .about__promise {
-    margin-top: 22px !important;
+    margin-top: 30px !important;
+    font-size: 18px;
+    font-weight: 500;
   }
 
   .about__signature {
@@ -2633,7 +2750,8 @@ a {
   }
 
   .about__signature img {
-    width: 120px;
+    width: 180px;
+    height: 63px;
   }
 
   .pricing {
@@ -2986,6 +3104,27 @@ a {
   .footer__legal nav {
     justify-content: center;
     gap: 7px;
+  }
+
+  .analytics-consent {
+    right: 12px;
+    bottom: calc(92px + env(safe-area-inset-bottom));
+    left: 12px;
+    width: auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 16px;
+    transform: none;
+  }
+
+  .analytics-consent__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .analytics-consent__button {
+    padding-inline: 10px;
   }
 }
 

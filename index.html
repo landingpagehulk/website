@@ -6,11 +6,13 @@
     <meta name="theme-color" content="#041d12">
     <meta name="description" content="Conversion-focused Shopify landing pages, tested against your current store.">
     <title>Landing Page Hulk — Shopify CRO &amp; Landing Pages</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600;700;800&family=Tilt+Warp&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@200;300;400;500;600;700;800&family=Tilt+Warp&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
     <script src="scripts/main.js" defer></script>
+    <script src="scripts/analytics.js" defer></script>
   </head>
   <body>
     <header class="announcement" aria-label="Studio highlights">
@@ -259,7 +261,7 @@
             <h2 class="display" id="about-title">I CONVERT YOUR<br><em>COLD TRAFFIC</em></h2>
             <p>Led by Shopify CRO &amp; Landing Page Specialist, Hasan helps eCommerce brands improve their customer journey, strengthen their offers, and build pages designed to convert more visitors into customers.</p>
             <p>With 4,000+ LinkedIn followers, Hasan’s swipe files and CRO tools have been used by thousands of brands — many making six figures from his free resources alone.</p>
-            <p>We specialize in:</p>
+            <p class="about__specialization">We specialize in:</p>
             <ul>
               <li>Shopify Landing Pages &amp; Product Pages</li>
               <li>CRO &amp; Conversion Optimization</li>
@@ -450,12 +452,27 @@
           <nav aria-label="Legal">
             <a href="mailto:shishir.helps@gmail.com?subject=Privacy%20policy">Privacy Policy</a>
             <a href="mailto:shishir.helps@gmail.com?subject=Terms">Terms</a>
+            <button class="footer__privacy-settings" type="button" data-open-consent-settings>Privacy settings</button>
             <a href="mailto:shishir.helps@gmail.com">shishir.helps@gmail.com</a>
           </nav>
           <small>© 2026 Landing Page Hulk. All rights reserved.</small>
         </div>
       </div>
     </footer>
+
+    <aside class="analytics-consent" data-analytics-consent hidden aria-labelledby="analytics-consent-title">
+      <div class="analytics-consent__copy">
+        <h2 id="analytics-consent-title">Your privacy matters</h2>
+        <p>We use Google Analytics to understand site visits. Analytics runs only if you accept.</p>
+        <p class="analytics-consent__error" data-consent-error role="alert" hidden>
+          Your choice could not be saved. Please enable browser storage and try again.
+        </p>
+      </div>
+      <div class="analytics-consent__actions">
+        <button class="analytics-consent__button analytics-consent__button--reject" type="button" data-consent-reject>Reject</button>
+        <button class="analytics-consent__button analytics-consent__button--accept" type="button" data-consent-accept>Accept analytics</button>
+      </div>
+    </aside>
 
     <dialog class="preview-dialog" aria-labelledby="preview-title">
       <div class="preview-dialog__bar">
