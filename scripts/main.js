@@ -509,6 +509,56 @@ caseSection?.addEventListener("keydown", (event) => {
   }
 });
 
+const comparisonSection = document.querySelector(".comparison");
+const comparisonMetrics = [...document.querySelectorAll(".comparison-card__metric")];
+const comparisonAnimationState = new WeakSet();
+
+function countComparisonMetric(metric) {
+  if (comparisonAnimationState.has(metric)) {
+    return;
+  }
+  comparisonAnimationState.add(metric);
+
+  const target = Number.parseFloat(metric.textContent);
+  if (!Number.isFinite(target)) {
+    return;
+  }
+
+  if (reducedMotion.matches) {
+    metric.textContent = `${target.toFixed(2)}%`;
+    return;
+  }
+
+  const duration = 1400;
+  const startedAt = performance.now();
+
+  function update(now) {
+    const progress = Math.min((now - startedAt) / duration, 1);
+    const easedProgress = 1 - Math.pow(1 - progress, 3);
+    metric.textContent = `${(target * easedProgress).toFixed(2)}%`;
+
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    }
+  }
+
+  metric.textContent = "0.00%";
+  requestAnimationFrame(update);
+}
+
+if (comparisonSection && "IntersectionObserver" in window) {
+  const comparisonObserver = new IntersectionObserver((entries, observer) => {
+    if (entries.some((entry) => entry.isIntersecting)) {
+      comparisonMetrics.forEach(countComparisonMetric);
+      observer.disconnect();
+    }
+  }, { threshold: 0.35 });
+
+  comparisonObserver.observe(comparisonSection);
+} else {
+  comparisonMetrics.forEach(countComparisonMetric);
+}
+
 renderCaseSlide({ eager: true });
 window.setTimeout(() => idle(preloadAdjacentCaseSlides), 1800);
 

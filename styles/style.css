@@ -158,12 +158,15 @@ a {
 .hero__preview {
   position: relative;
   display: block;
-  width: min(722px, calc(100% - 40px));
+  width: min(780px, calc(100% - 40px));
   aspect-ratio: 722 / 406;
   padding: 0;
   overflow: hidden;
-  border: 2px solid #fff;
-  background: #06130e;
+  border: 3px solid transparent;
+  background:
+    linear-gradient(#06130e, #06130e) padding-box,
+    conic-gradient(from var(--preview-border-angle), #dffa53, #fff, #853913, #dffa53) border-box;
+  animation: preview-border-spin 8s linear infinite;
   cursor: pointer;
 }
 
@@ -186,6 +189,7 @@ a {
   place-items: center;
   transform: translate(-50%, -50%);
   transition: transform 180ms ease;
+  animation: hero-play-pulse 3s ease-in-out infinite;
 }
 
 .hero__play img {
@@ -194,7 +198,7 @@ a {
 }
 
 .hero__preview:hover .hero__play {
-  transform: translate(-50%, -50%) scale(1.06);
+  transform: translate(-50%, -52%) scale(1.04);
 }
 
 .audit-button {
@@ -264,7 +268,7 @@ a {
 
 .showcase-marquee {
   width: 100%;
-  margin-top: 50px;
+  margin-top: 30px;
   overflow: hidden;
 }
 
@@ -360,6 +364,10 @@ a {
   color: var(--lime);
 }
 
+.comparison-card--before .comparison-card__metric {
+  font-size: 140px;
+}
+
 .comparison-card > img {
   width: min(330px, 74%);
   height: auto;
@@ -371,6 +379,8 @@ a {
 }
 
 .comparison-card--before > img {
+  width: 300px;
+  width: 310px;
   transform: rotate(2.8deg);
 }
 
@@ -381,7 +391,7 @@ a {
 .comparison-card__label {
   position: absolute;
   z-index: 2;
-  top: 120px;
+  top: 135px;
   left: 50%;
   padding: 9px 20px;
   border: 1px solid #2b2b2b;
@@ -397,11 +407,13 @@ a {
   border-color: #f40000;
   background: #f40000;
   color: #fff;
+  font-size: 30px;
   transform: translateX(-50%) rotate(2deg);
 }
 
 .comparison-card__label--after {
   background: var(--lime);
+  font-size: 37px;
 }
 
 .case-studies {
@@ -2101,6 +2113,27 @@ a {
   }
 }
 
+@property --preview-border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes preview-border-spin {
+  to {
+    --preview-border-angle: 360deg;
+  }
+}
+
+@keyframes hero-play-pulse {
+  0%, 100% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.05;
+  }
+}
+
 @keyframes showcase-scroll {
   to {
     transform: translateX(-50%);
@@ -2156,9 +2189,9 @@ a {
   }
 
   .announcement__track {
-    gap: 20px;
+    gap: 10px;
     padding-inline: 20px;
-    font-size: 9px;
+    font-size: 14px;
     animation-duration: 30s;
   }
 
@@ -2177,7 +2210,7 @@ a {
 
   .hero__title {
     width: min(300px, calc(100% - 52px));
-    font-size: clamp(46px, 14.36vw, 56px);
+    font-size: 60px;
     letter-spacing: -0.05em;
     line-height: 0.92;
     text-align: center;
@@ -2192,14 +2225,14 @@ a {
   }
 
   .hero__preview {
-    width: 100%;
+    width: calc(100% - 20px);
     aspect-ratio: 390 / 219.3;
-    border-right: 0;
-    border-left: 0;
+    border-width: 2px;
   }
 
   .hero__play {
     width: 90px;
+    animation: hero-play-pulse 3s ease-in-out infinite;
   }
 
   .hero__audit {
@@ -2211,7 +2244,7 @@ a {
 
   .hero__audit > span {
     gap: 4px;
-    font-size: 16px;
+    font-size: 18px;
     letter-spacing: 0.02em;
   }
 
@@ -2221,7 +2254,7 @@ a {
   }
 
   .hero__audit small {
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.2;
   }
 
@@ -2261,7 +2294,7 @@ a {
   }
 
   .comparison {
-    padding: 42px 0 80px;
+    padding: 42px 0 40px;
   }
 
   .comparison__inner {
@@ -2270,7 +2303,7 @@ a {
 
   .comparison__title {
     margin: 0 20px 16px;
-    font-size: 28px;
+    font-size: 32px;
     letter-spacing: -0.05em;
     line-height: 1.08;
   }
@@ -2295,6 +2328,10 @@ a {
     font-size: 48px;
     letter-spacing: -0.03em;
     line-height: 1;
+  }
+
+  .comparison-card--before .comparison-card__metric {
+    font-size: 40px;
   }
 
   .comparison-card > img {
@@ -2324,6 +2361,7 @@ a {
 
   .comparison-card--after .comparison-card__label {
     top: 48px;
+    font-size: 18px;
   }
 
   .case-studies {
@@ -3130,11 +3168,11 @@ a {
 
 @media (max-width: 380px) {
   .hero__title {
-    font-size: 46px;
+    font-size: 60px;
   }
 
   .hero__audit > span {
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .comparison__title {
