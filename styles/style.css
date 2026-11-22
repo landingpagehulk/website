@@ -102,10 +102,10 @@ a {
   align-items: center;
   gap: 26px;
   padding-inline: 35px;
-  animation: announcement-scroll 38s linear infinite;
+  animation: announcement-scroll 18s linear infinite;
   font-family: var(--body);
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 500;
   letter-spacing: 0.035em;
   white-space: nowrap;
 }
@@ -202,6 +202,7 @@ a {
 }
 
 .audit-button {
+  position: relative;
   display: flex;
   width: min(520px, calc(100% - 40px));
   min-height: 74px;
@@ -209,6 +210,7 @@ a {
   align-items: center;
   justify-content: center;
   padding: 10px 24px 8px;
+  overflow: hidden;
   border: 2px solid #fff;
   border-radius: 15px;
   background: var(--lime);
@@ -216,6 +218,25 @@ a {
   text-align: center;
   text-decoration: none;
   transition: transform 160ms ease, filter 160ms ease;
+}
+
+.audit-button::after {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.20) 50%,
+    rgba(255, 255, 255, 0) 70%,
+    transparent 100%
+  );
+  content: "";
+  pointer-events: none;
+  animation: button-shine 2s ease-in-out infinite;
 }
 
 .audit-button:hover {
@@ -331,6 +352,12 @@ a {
   font-style: normal;
 }
 
+.text-shine {
+  display: inline-block;
+  color: var(--lime);
+  animation: text-flash 3s ease-in-out infinite;
+}
+
 .comparison__figures {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -397,7 +424,7 @@ a {
   border: 1px solid #2b2b2b;
   border-radius: 8px;
   color: #000;
-  font-size: 20px;
+  font-size: 28px;
   font-weight: 800;
   line-height: 1;
   transform: translateX(-50%) rotate(-2deg);
@@ -839,7 +866,7 @@ a {
 .ingredients .section-heading h2 {
   padding-top: 26px;
   color: var(--ink);
-  font-size: clamp(68px, 7vw, 104px);
+  font-size: 110px;
   line-height: 0.9;
 }
 
@@ -861,24 +888,49 @@ a {
   min-width: 0;
   padding: 27px;
   overflow: hidden;
-  border: 1px solid rgba(133, 57, 19, 0.1);
+  border: 1px solid #D8BDAF;
   border-radius: 12px;
   background: #fbf5e7;
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.ingredient-card:hover {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#fbf5e7, #fbf5e7) padding-box,
+    linear-gradient(135deg, #853913, #d8bdaf, #853913) border-box;
+  box-shadow: 0 18px 36px rgba(52, 38, 27, 0.16);
+  transform: translateY(-6px);
 }
 
 .ingredient-card__index {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   margin: 0 0 12px;
   color: var(--brown);
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 1.7px;
   text-transform: uppercase;
+}
+
+.ingredient-card__index::before {
+  width: 4px;
+  height: 4px;
+  flex: 0 0 4px;
+  border-radius: 50%;
+  background: var(--brown);
+  box-shadow: 0 0 0 rgba(133, 57, 19, 0);
+  content: "";
+  animation: ingredient-dot-blink 2s ease-in-out infinite;
 }
 
 .ingredient-card h3 {
   margin: 0 0 10px;
   font-family: var(--display);
-  font-size: 24px;
+  font-size: 44px;
+  font-weight: 300;
   letter-spacing: -0.045em;
   line-height: 1;
   text-transform: uppercase;
@@ -887,8 +939,9 @@ a {
 .ingredient-card__description {
   margin: 0;
   color: #77766f;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.55;
+  text-transform: uppercase;
 }
 
 .ingredient-card__product {
@@ -902,13 +955,14 @@ a {
   display: inline-flex;
   min-height: 23px;
   align-items: center;
+  margin-top: 10px;
   padding: 4px 9px;
   border: 1px solid rgba(133, 57, 19, 0.18);
   border-radius: 20px;
   background: #f5ead3;
   color: var(--brown);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   white-space: nowrap;
 }
 
@@ -926,12 +980,12 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 6px;
-  padding: 7px 9px;
+  padding: 14px 9px;
   border: 1px solid rgba(133, 57, 19, 0.15);
   border-radius: 8px;
   color: #8d8579;
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .bundle-list li:first-child {
@@ -943,19 +997,23 @@ a {
   padding: 2px 4px;
   background: var(--brown);
   color: #fff;
-  font-size: 7px;
+  font-size: 11px;
 }
 
 .bundle-list li strong {
   color: var(--brown);
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .ingredient-card__stars {
   margin: 12px 0 3px;
   color: var(--brown);
-  font-size: 18px;
+  font-size: 20px;
   letter-spacing: 2px;
+}
+
+.ingredient-card--social .ingredient-card__description {
+  font-size: 12px;
 }
 
 .trust-score {
@@ -965,7 +1023,7 @@ a {
   margin: 14px 0 12px;
   color: #77766f;
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .trust-score strong {
@@ -982,9 +1040,10 @@ a {
 
 .trust-score i b {
   display: block;
-  width: 94%;
+  width: 0;
   height: 100%;
   background: #c45f30;
+  transition: width 1400ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .ingredient-card__video {
@@ -993,6 +1052,7 @@ a {
   margin: 12px 0;
   border-radius: 8px;
   object-fit: cover;
+  background: #111;
 }
 
 .copy-list,
@@ -1008,7 +1068,7 @@ a {
   position: relative;
   padding-left: 22px;
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
 }
@@ -1048,7 +1108,7 @@ a {
   min-height: 35px;
   align-items: center;
   gap: 9px;
-  padding: 7px 10px;
+  padding: 14px 10px;
   border: 1px solid rgba(133, 57, 19, 0.12);
   border-radius: 8px;
   background: #f7eddb;
@@ -1058,7 +1118,7 @@ a {
 
 .trust-list li span {
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.06em;
 }
 
@@ -1067,13 +1127,28 @@ a {
 }
 
 .ingredient-card__mobile-shot {
+  --mobile-shot-height: 265px;
+  position: relative;
   width: 100%;
-  height: 265px;
+  height: var(--mobile-shot-height);
   margin: 12px 0;
+  overflow: hidden;
   border: 1px solid rgba(133, 57, 19, 0.14);
   border-radius: 8px;
-  object-fit: cover;
-  object-position: top;
+  background: #fff;
+}
+
+.ingredient-card__mobile-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  will-change: transform;
+  animation: mobile-first-scroll 14s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+
+.ingredient-card__mobile-shot.is-visible img {
+  animation-play-state: running;
 }
 
 .ingredient-ticker {
@@ -1088,7 +1163,7 @@ a {
 .ingredient-ticker__track {
   display: flex;
   width: max-content;
-  animation: ingredient-ticker-scroll 32s linear infinite;
+  animation: ingredient-ticker-scroll 18s linear infinite;
   will-change: transform;
 }
 
@@ -1097,13 +1172,14 @@ a {
   flex: 0 0 auto;
   padding: 12px 0;
   font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .ingredient-ticker__group > span {
   margin-inline: 20px;
   color: #d6c4a2;
+  font-size: 16px;
 }
 
 .ingredient-bottom {
@@ -1124,26 +1200,37 @@ a {
   border-radius: 12px;
   background: #fbf5e7;
   text-align: center;
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.ingredient-count:hover,
+.ingredient-cta:hover {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#fbf5e7, #fbf5e7) padding-box,
+    linear-gradient(135deg, #853913, #d8bdaf, #853913) border-box;
+  box-shadow: 0 18px 36px rgba(52, 38, 27, 0.16);
+  transform: translateY(-6px);
 }
 
 .ingredient-count strong {
   color: var(--brown);
   font-family: var(--display);
-  font-size: 84px;
+  font-size: 86px;
   line-height: 0.9;
 }
 
 .ingredient-count b {
   margin-top: 8px;
   font-family: var(--display);
-  font-size: 24px;
+  font-size: 32px;
 }
 
 .ingredient-count small {
   margin-top: 10px;
   color: #878175;
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 10px;
   letter-spacing: 1.3px;
 }
 
@@ -1153,10 +1240,16 @@ a {
   color: #fff;
 }
 
+.ingredient-cta:hover {
+  background:
+    linear-gradient(var(--brown), var(--brown)) padding-box,
+    linear-gradient(135deg, #853913, #d8bdaf, #853913) border-box;
+}
+
 .ingredient-cta h3 {
   margin: 0 0 20px;
   font-family: var(--display);
-  font-size: 32px;
+  font-size: 52px;
   line-height: 0.95;
 }
 
@@ -1167,7 +1260,7 @@ a {
 
 .audit-button--ingredient small {
   display: block;
-  font-size: 10px;
+  font-size: 16px;
 }
 
 .about {
@@ -2125,6 +2218,28 @@ a {
   }
 }
 
+@keyframes text-flash {
+  0%, 45%, 55%, 100% {
+    color: var(--lime);
+    text-shadow: none;
+  }
+  50% {
+    color: #fff;
+    text-shadow:
+      0 0 30px rgba(255, 255, 255, 0.6),
+      0 0 60px rgba(223, 250, 83, 0.3);
+  }
+}
+
+@keyframes button-shine {
+  0% {
+    left: -100%;
+  }
+  40%, 100% {
+    left: 120%;
+  }
+}
+
 @keyframes hero-play-pulse {
   0%, 100% {
     scale: 1;
@@ -2143,6 +2258,26 @@ a {
 @keyframes ingredient-ticker-scroll {
   to {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes mobile-first-scroll {
+  0%, 8% {
+    transform: translateY(0);
+  }
+  92%, 100% {
+    transform: translateY(calc(-100% + var(--mobile-shot-height)));
+  }
+}
+
+@keyframes ingredient-dot-blink {
+  0%, 100% {
+    opacity: 0.35;
+    box-shadow: 0 0 0 0 rgba(133, 57, 19, 0);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 6px 2px rgba(133, 57, 19, 0.45);
   }
 }
 
@@ -2192,7 +2327,7 @@ a {
     gap: 10px;
     padding-inline: 20px;
     font-size: 14px;
-    animation-duration: 30s;
+    animation-duration: 18s;
   }
 
   .announcement__track i {
@@ -2554,7 +2689,7 @@ a {
 
   .ingredients .section-heading h2 {
     padding-top: 30px;
-    font-size: 39px;
+    font-size: 60px;
     letter-spacing: -0.055em;
     line-height: 0.98;
   }
@@ -2584,22 +2719,28 @@ a {
   }
 
   .ingredient-card h3 {
-    font-size: 23px;
+    font-size: 34px;
   }
 
   .ingredient-card__index {
     margin-bottom: 12px;
-    font-size: 8px;
+    font-size: 12px;
   }
 
   .ingredient-card__description {
-    font-size: 11px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .result-pill {
+    font-size: 12px;
   }
 
   .ingredient-card__product {
-    height: 304px;
-    object-fit: cover;
-    object-position: center;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    object-position: top;
   }
 
   .ingredient-card--offer {
@@ -2612,7 +2753,12 @@ a {
 
   .bundle-list li {
     min-height: 35px;
-    font-size: 9px;
+    font-size: 12px;
+  }
+
+  .bundle-list li span,
+  .bundle-list li strong {
+    font-size: 12px;
   }
 
   .ingredient-card--social {
@@ -2621,6 +2767,11 @@ a {
 
   .ingredient-card--social .ingredient-card__stars {
     margin-top: 10px;
+  }
+
+  .ingredient-card--social .ingredient-card__description,
+  .trust-score {
+    font-size: 12px;
   }
 
   .ingredient-card--ugc {
@@ -2642,7 +2793,7 @@ a {
   }
 
   .copy-list li {
-    font-size: 9px;
+    font-size: 12px;
   }
 
   .ingredient-card--trust {
@@ -2651,6 +2802,11 @@ a {
 
   .trust-list li {
     min-height: 41px;
+    font-size: 12px;
+  }
+
+  .trust-list li span {
+    font-size: 11px;
   }
 
   .ingredient-card--mobile {
@@ -2658,7 +2814,7 @@ a {
   }
 
   .ingredient-card__mobile-shot {
-    height: 282px;
+    --mobile-shot-height: 282px;
     margin: 12px 0;
   }
 
@@ -2669,11 +2825,13 @@ a {
 
   .ingredient-ticker__group {
     padding: 11px 0;
-    font-size: 10px;
+    font-size: 16px;
+    font-weight: 700;
   }
 
   .ingredient-ticker__group > span {
     margin-inline: 13px;
+    font-size: 16px;
   }
 
   .ingredient-bottom {
@@ -2687,11 +2845,15 @@ a {
   }
 
   .ingredient-count strong {
-    font-size: 74px;
+    font-size: 86px;
   }
 
   .ingredient-count b {
-    font-size: 21px;
+    font-size: 32px;
+  }
+
+  .ingredient-count small {
+    font-size: 10px;
   }
 
   .ingredient-cta {
@@ -2701,7 +2863,7 @@ a {
 
   .ingredient-cta h3 {
     margin-bottom: 14px;
-    font-size: 25px;
+    font-size: 35px;
   }
 
   .audit-button--ingredient {
@@ -2709,7 +2871,7 @@ a {
   }
 
   .audit-button--ingredient > span {
-    font-size: 15px;
+    font-size: 18px;
   }
 
   .audit-button--ingredient > span img {
@@ -2718,7 +2880,7 @@ a {
   }
 
   .audit-button--ingredient small {
-    font-size: 9px;
+    font-size: 12px;
   }
 
   .about {

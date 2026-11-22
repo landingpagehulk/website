@@ -33,7 +33,7 @@
         <div class="hero__top">
           <h1 class="display hero__title" id="hero-title">
             <span class="hero__title-line">YOUR PAGE VS</span>
-            <span class="hero__title-line hero__title-line--accent">THE HULK</span>
+            <span class="hero__title-line hero__title-line--accent text-shine">THE HULK</span>
           </h1>
           <button class="hero__preview" type="button" data-open-preview aria-label="Open the page design preview">
             <picture>
@@ -75,7 +75,7 @@
         <div class="comparison__inner">
           <h2 class="display comparison__title" id="comparison-title">
             <span>UNDISPUTED CHAMPION.</span>
-            <span>THE <em>HULK HOGAN</em> OF CRO.</span>
+            <span>THE <em class="text-shine">HULK HOGAN</em> OF CRO.</span>
           </h2>
           <div class="comparison__figures">
             <figure class="comparison-card comparison-card--before">
@@ -84,7 +84,7 @@
               <img src="images/comparison-before.png" alt="Before: a granola storefront with a low-converting product page">
             </figure>
             <figure class="comparison-card comparison-card--after">
-              <figcaption class="display comparison-card__metric">4.75%</figcaption>
+              <figcaption class="display comparison-card__metric text-shine">4.75%</figcaption>
               <span class="comparison-card__label comparison-card__label--after">AFTER</span>
               <img src="images/comparison-after.png" alt="After: a redesigned Virtue Granola storefront">
             </figure>
@@ -185,7 +185,9 @@
               <article class="ingredient-card ingredient-card--ugc">
                 <p class="ingredient-card__index">INGREDIENT 03</p>
                 <h3>UGC VIDEO</h3>
-                <img class="ingredient-card__video" src="images/ingredient-video.png" alt="Customer testimonial video still">
+                <video class="ingredient-card__video" autoplay muted loop playsinline preload="metadata" aria-label="Customer testimonial video">
+                  <source src="images/ugc-video.mp4" type="video/mp4">
+                </video>
                 <p class="ingredient-card__description">Real people. Real results. More trust than any ad.</p>
                 <span class="result-pill">↑ +31% trust score</span>
               </article>
@@ -218,7 +220,9 @@
               <article class="ingredient-card ingredient-card--mobile">
                 <p class="ingredient-card__index">INGREDIENT 07</p>
                 <h3>MOBILE FIRST</h3>
-                <img class="ingredient-card__mobile-shot" src="images/ingredient-mobile.png" alt="Mobile-first Chichi product page">
+                <div class="ingredient-card__mobile-shot">
+                  <img src="images/mobile-first-screenshot.png" alt="Mobile-first Chichi product page">
+                </div>
                 <p class="ingredient-card__description">80% of traffic is mobile. We build for that first.</p>
               </article>
               <article class="ingredient-card ingredient-card--social">
@@ -226,7 +230,7 @@
                 <h3>SOCIAL PROOF</h3>
                 <p class="ingredient-card__stars" aria-label="Five stars">★★★★★</p>
                 <p class="ingredient-card__description">8,718 reviews · 4.4 / 5</p>
-                <div class="trust-score"><span>Trust score</span><strong>94%</strong><i><b></b></i></div>
+                <div class="trust-score"><span>Trust score</span><strong>0%</strong><i><b></b></i></div>
                 <span class="result-pill">↑ +22% CVR uplift</span>
               </article>
             </div>
@@ -434,7 +438,7 @@
       <div class="section-shell footer__inner">
         <div class="footer__brand">
           <img src="images/mascot.png" alt="Landing Page Hulk mascot">
-          <p class="display">LANDING PAGE<br><strong>HULK</strong></p>
+          <p class="display">LANDING PAGE<br><strong class="text-shine">HULK</strong></p>
         </div>
         <div class="footer__social">
           <a class="social-card" href="https://www.instagram.com/hasan_landingpagehulk/" target="_blank" rel="noreferrer">

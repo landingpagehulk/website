@@ -559,6 +559,74 @@ if (comparisonSection && "IntersectionObserver" in window) {
   comparisonMetrics.forEach(countComparisonMetric);
 }
 
+const ingredientsSection = document.querySelector(".ingredients");
+const trustScoreCard = document.querySelector(".ingredient-card--social");
+const trustScoreValue = trustScoreCard?.querySelector(".trust-score strong");
+const trustScoreFill = trustScoreCard?.querySelector(".trust-score i b");
+const trustScoreTarget = 94;
+let trustScoreAnimated = false;
+
+function animateTrustScore() {
+  if (trustScoreAnimated || !trustScoreValue || !trustScoreFill) {
+    return;
+  }
+  trustScoreAnimated = true;
+
+  if (reducedMotion.matches) {
+    trustScoreValue.textContent = `${trustScoreTarget}%`;
+    trustScoreFill.style.width = `${trustScoreTarget}%`;
+    return;
+  }
+
+  const duration = 1400;
+  const startedAt = performance.now();
+
+  function update(now) {
+    const progress = Math.min((now - startedAt) / duration, 1);
+    const easedProgress = 1 - Math.pow(1 - progress, 3);
+    const value = Math.round(trustScoreTarget * easedProgress);
+    trustScoreValue.textContent = `${value}%`;
+    trustScoreFill.style.width = `${value}%`;
+
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    }
+  }
+
+  requestAnimationFrame(update);
+}
+
+if (ingredientsSection && "IntersectionObserver" in window) {
+  const ingredientsObserver = new IntersectionObserver((entries, observer) => {
+    if (entries.some((entry) => entry.isIntersecting)) {
+      animateTrustScore();
+      observer.disconnect();
+    }
+  }, { threshold: 0.2 });
+
+  ingredientsObserver.observe(ingredientsSection);
+} else {
+  animateTrustScore();
+}
+
+const mobileFirstShot = document.querySelector(".ingredient-card__mobile-shot");
+
+if (mobileFirstShot && "IntersectionObserver" in window) {
+  const mobileFirstObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      mobileFirstShot.classList.toggle("is-visible", entry.isIntersecting);
+      if (!entry.isIntersecting) {
+        const shotImage = mobileFirstShot.querySelector("img");
+        shotImage?.getAnimations().forEach((animation) => animation.cancel());
+      }
+    });
+  }, { threshold: 0.35 });
+
+  mobileFirstObserver.observe(mobileFirstShot);
+} else if (mobileFirstShot) {
+  mobileFirstShot.classList.add("is-visible");
+}
+
 renderCaseSlide({ eager: true });
 window.setTimeout(() => idle(preloadAdjacentCaseSlides), 1800);
 
