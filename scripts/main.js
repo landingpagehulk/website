@@ -627,6 +627,53 @@ if (mobileFirstShot && "IntersectionObserver" in window) {
   mobileFirstShot.classList.add("is-visible");
 }
 
+const processList = document.querySelector(".process-list");
+
+if (processList) {
+  const processSteps = [...processList.children].filter((step) => step instanceof HTMLElement);
+  let processProgressScheduled = false;
+
+  function updateProcessLineProgress() {
+    processProgressScheduled = false;
+    const activationY = window.innerHeight * 0.6;
+
+    processSteps.forEach((step, index) => {
+      const currentMarker = step.querySelector(".process-list__number");
+      if (!(currentMarker instanceof HTMLElement)) {
+        return;
+      }
+
+      const currentY = currentMarker.getBoundingClientRect().top + currentMarker.offsetHeight / 2;
+      step.classList.toggle("is-active", index === 0 || currentY <= activationY);
+
+      const nextMarker = processSteps[index + 1]?.querySelector(".process-list__number");
+      if (!(nextMarker instanceof HTMLElement)) {
+        return;
+      }
+
+      const nextY = nextMarker.getBoundingClientRect().top + nextMarker.offsetHeight / 2;
+      const distance = nextY - currentY;
+      const progress = distance > 0
+        ? Math.min(1, Math.max(0, (activationY - currentY) / distance))
+        : 0;
+
+      step.style.setProperty("--process-line-progress", `${progress * 100}%`);
+    });
+  }
+
+  function scheduleProcessLineProgress() {
+    if (processProgressScheduled) {
+      return;
+    }
+    processProgressScheduled = true;
+    requestAnimationFrame(updateProcessLineProgress);
+  }
+
+  window.addEventListener("scroll", scheduleProcessLineProgress, { passive: true });
+  window.addEventListener("resize", scheduleProcessLineProgress);
+  scheduleProcessLineProgress();
+}
+
 renderCaseSlide({ eager: true });
 window.setTimeout(() => idle(preloadAdjacentCaseSlides), 1800);
 

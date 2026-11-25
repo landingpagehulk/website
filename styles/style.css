@@ -358,6 +358,12 @@ a {
   animation: text-flash 3s ease-in-out infinite;
 }
 
+.section-heading h2 .process-title__shine {
+  display: inline-block;
+  color: #853913;
+  animation: process-title-flash 3s ease-in-out infinite;
+}
+
 .price-shine {
   display: inline-block;
   animation: price-flash 3s ease-in-out infinite;
@@ -1602,7 +1608,7 @@ a {
 }
 
 .process {
-  padding: 100px 0;
+  padding: 10px 0 100px;
   background: var(--cream);
 }
 
@@ -1615,8 +1621,8 @@ a {
 .process-list {
   --process-node-size: 50px;
   --process-node-center: 25px;
-  --process-row-gap: 22px;
-  --process-line-extension: 47px;
+  --process-row-gap: 42px;
+  --process-line-extension: 67px;
   position: relative;
   display: grid;
   gap: var(--process-row-gap);
@@ -1644,7 +1650,13 @@ a {
   bottom: calc(0px - var(--process-line-extension));
   left: calc(var(--process-node-center) - 1px);
   width: 2px;
-  background: rgba(1, 1, 2, 0.12);
+  background: linear-gradient(
+    to bottom,
+    #853913 0,
+    #853913 var(--process-line-progress, 0%),
+    rgba(1, 1, 2, 0.12) var(--process-line-progress, 0%),
+    rgba(1, 1, 2, 0.12) 100%
+  );
   content: "";
 }
 
@@ -1659,19 +1671,21 @@ a {
   background: #fbf5e7;
   color: #111;
   font-family: var(--mono);
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
   place-items: center;
+  transition: background-color 180ms ease, color 180ms ease;
 }
 
-.process-list li:first-child .process-list__number {
+.process-list li:first-child .process-list__number,
+.process-list li.is-active .process-list__number {
   background: var(--brown);
   color: #fff;
 }
 
 .process-list h3 {
   margin: 0 0 4px;
-  font-size: 30px;
+  font-size: 44px;
   letter-spacing: -0.045em;
 }
 
@@ -1679,7 +1693,7 @@ a {
   max-width: 500px;
   margin: 0;
   color: #111;
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.8;
 }
 
@@ -1803,7 +1817,7 @@ a {
 
 .resource-card__download-icon {
   display: block;
-  width: 30px;
+  width: 24px;
   height: 24px;
   flex: 0 0 auto;
 }
@@ -2288,6 +2302,17 @@ a {
     text-shadow:
       0 0 30px rgba(255, 255, 255, 0.6),
       0 0 60px rgba(223, 250, 83, 0.3);
+  }
+}
+
+@keyframes process-title-flash {
+  0%, 45%, 55%, 100% {
+    text-shadow: none;
+  }
+  50% {
+    text-shadow:
+      0 0 30px rgba(255, 255, 255, 0.6),
+      0 0 60px rgba(133, 57, 19, 0.3);
   }
 }
 
@@ -3178,15 +3203,15 @@ a {
 
   .process .section-heading h2 {
     padding-top: 31px;
-    font-size: 38px;
+    font-size: 52px;
     line-height: 0.95;
   }
 
   .process-list {
     --process-node-size: 42px;
     --process-node-center: 21px;
-    --process-row-gap: 28px;
-    --process-line-extension: 49px;
+    --process-row-gap: 38px;
+    --process-line-extension: 59px;
     gap: var(--process-row-gap);
     width: 100%;
     padding: 58px 20px 34px;
@@ -3205,16 +3230,16 @@ a {
   .process-list__number {
     width: 42px;
     height: 42px;
-    font-size: 13px;
+    font-size: 18px;
   }
 
   .process-list h3 {
     margin: 3px 0 8px;
-    font-size: 25px;
+    font-size: 34px;
   }
 
   .process-list p {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.75;
   }
 
@@ -3228,7 +3253,7 @@ a {
 
   .resources .section-heading h2 {
     padding-top: 31px;
-    font-size: 39px;
+    font-size: 52px;
     line-height: 0.95;
   }
 
@@ -3262,7 +3287,7 @@ a {
   }
 
   .resource-card--trust {
-    min-height: 600px;
+    min-height: 530px;
     padding: 30px;
   }
 
