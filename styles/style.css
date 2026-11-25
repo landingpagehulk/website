@@ -1599,7 +1599,7 @@ a {
   width: 100%;
   background: #f0e5d2;
   color: var(--brown);
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .pricing-card__button--light:hover {
@@ -3190,7 +3190,7 @@ a {
   .pricing-card__button--light {
     width: 100%;
     min-height: 59px;
-    font-size: 12px;
+    font-size: 16px;
   }
 
   .process {
